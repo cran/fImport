@@ -16,71 +16,25 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2007, Diethelm Wuertz, GPL
+#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   info@rmetrics.org
 #   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
 
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
 #  fWEBDATA              Class Representation for WEB download
-#  show.fWEBDATA         S4 Show Method for WEB downloaded data
 ################################################################################
-
-
-################################################################################
-# FUNCTION:             DESCRIPTION:
-#  fWEBDATA              Class Representation
-#  show.fWEBDATA         S4 Show Method
 
 
 setClass("fWEBDATA", 
     representation(
         call = "call",
-        data = "data.frame",
+        data = "timeSeries",
         param = "character",
         title = "character",
         description = "character")  
 )
-
-
-# ------------------------------------------------------------------------------
-
-
-show.fWEBDATA = 
-function(object)
-{   # A function implemented by Diethelm Wuertz
-    
-    # FUNCTION:
-       
-    # Unlike print the argument for show is 'object'.
-    x = object
-    
-    # Title:
-    cat("\nTitle:\n", object@title, "\n", sep = "")
-    
-    # Parameter:
-    cat("\nParameter:\n")
-    param = cbind(object@param)
-    colnames(param) = "Value:"
-    print(param, quotes = FALSE) 
-    
-    # Description:
-    cat("\nDescription:\n", object@description, sep = "")   
-    cat("\n\n")
-    
-    # Return Value:
-    invisible()
-}
-
-
-setMethod("show", "fWEBDATA", show.fWEBDATA)
 
 
 ################################################################################

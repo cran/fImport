@@ -4,7 +4,6 @@
 
 \alias{yahooImport}
 \alias{yahooSeries}
-\alias{keystatsImport}
 
 
 \title{Import Market Data from Yahoo}
@@ -12,60 +11,40 @@
 
 \description{
     
-    A collection and description of functions to import 
-    financial and economic market data from Yahoo's
-    web site.
-    \cr
-    
-    The functions are:
-    
-    \tabular{ll}{
-    \code{yahooImport} \tab daily stock market data from Yahoo's Web site, \cr
-    \code{yahooSeries} \tab easy to use download from Yahoo, \cr 
-    \code{keystatsImport} \tab key statistics from Yahoo's Web site.}
+    Imports financial time series data from chart.yahoo.com.
    
 }
 
 
 \usage{ 
-yahooImport(query, file = "tempfile", 
-    source = "http://chart.yahoo.com/table.csv?", save = FALSE,
-    sep = ";", swap = 20, try = TRUE)
-   
-yahooSeries(symbols = c("^DJI", "IBM"), from = NULL, to = NULL, 
-    nDaysBack = 365, quote = c("Open", "High", "Low", "Close", "Volume"), 
-    aggregation = c("d", "w", "m"), returnClass = c("timeSeries", "ts", 
-    "matrix", "data.frame"), getReturns = FALSE, \dots)
+yahooSeries(symbols, from = NULL, to = Sys.timeDate(), 
+    nDaysBack = 366, \dots) 
     
-keystatsImport(query, file = "tempfile", 
-    source = "http://finance.yahoo.com/q/ks?s=", save = FALSE, 
-    try = TRUE) 
+yahooImport(query, file = "tempfile", source = NULL,
+    frequency = c("daily", "weekly", "monthly"), 
+    from = NULL, to = Sys.timeDate(), nDaysBack = 366, 
+    save = FALSE, sep = ";", try = TRUE) 
 }
 
 
 \arguments{
 
-    \item{aggregation}{
-        a character string denoting the aggregation level of the 
-        downloaded data records, \code{d} for daily, \code{w} for
-        weekly and \code{m} for monthly data records.
-        }
     \item{file}{
-        a character string with filename, usually
-        having extension ".csv", where to save the downloaded data.
+        a character string with filename, usually having extension 
+        ".csv", where to save the downloaded data.
         }
-    \item{from, to}{
-        an ISO-8601 formatted character string of the starting (end) 
-        date, e.g. "2005-01-01".
+    \item{frequency}{
+        a character string, one of "auto", "quarterly", "monthly", 
+        or "daily", defining the frequency of the data records.
+        Note, the import function tries autodetect the frequency
+        of the time series to be dowwnloaded. This may fail, in
+        such case specify the frequency explicitely.
         }
-    \item{getReturns}{
-        a logical flag. Should return values be computed using the 
-        function \code{returnSeries}?
+    \item{from} {
+        the date from when to extract the time series.
         }
     \item{nDaysBack}{
-        an integer giving the length of the download period in number 
-        of days starting n days back from today. Only in use if 
-        \code{from} and \code{to} are not specified.
+        the number of days back.
         }
     \item{query}{
         a character string, denoting the location of the data at the 
@@ -76,33 +55,19 @@ keystatsImport(query, file = "tempfile",
         be stored under the path and file name specified by the
         string \code{file}. By default FALSE.
         }
-    \item{quote}{
-        [yahooSeries] - \cr
-        a character value or vector of strings giving the column name(s) 
-        of those instruments to be extracted from the download. 
-        }
-    \item{returnClass}{
-        a character string naming the class of the object to be 
-        returned. By default the function returns 
-        a \code{"timeSeries"} object, alternatives are: \code{"ts"}, 
-        \code{"matrix"}, or \code{"data.frame"}.
-        }
     \item{sep}{
-        a character value, defining the field separator for the 
-        destination file which saves the downloaded data records.
-        By default a semicolon.
+        a charcter value specifying the column separator.
         }
-    \item{source}{
-        a character string with the download URL.
+    \item{source}{a character string setting the URL of the source.
+        If \code{NULL}, then the URL will be set automatically to its
+        default value.
         }
-    \item{symbols}{
-        a character string value or vector, the Yahoo symbol name(s).
+    \item{symbols} {
+        a character string with the symbols to be downloaded.
         }
-    \item{swap}{
-        an integer value which determines when we swap from the
-        19th to 20th century, by default 20, i.e. we swap 1920.
-        This is necessary since Yahoo does not list the century in
-        its dates, e.g. "15-Aug-02".
+    \item{to} {
+        the end date of the data download, by default the current 
+        date.
         }
     \item{try}{
         a logical value, if set to TRUE the Internet access will be
@@ -110,10 +75,11 @@ keystatsImport(query, file = "tempfile",
         }
     \item{\dots}{
         optional arguments to be passed.
-        }        
+        }
+        
 }
-
-
+  
+  
 \value{
 
     The function \code{yahooImport} returns an S4 object of class 
@@ -153,6 +119,7 @@ keystatsImport(query, file = "tempfile",
   
     \bold{Import data from chart.yahoo.com:}
     \cr\cr
+    
     The query string is given as 
     \cr\cr
             \code{s=SYMBOL&a=DD&b=MM&c=CCYY&g=d&q=q&z=SYMBOL&x=.csv} 
@@ -194,15 +161,10 @@ keystatsImport(query, file = "tempfile",
 \note{
   
     \bold{Internet Download Functions:}
-    \cr\cr
+    
     IMPORTANT NOTE: If the service provider changes the data file format 
     it may become necessary to modify and update the functions. 
-    \cr
-    
-    The R package \code{tseries} from Adrian Trapletti offers an 
-    alternative function to download stock market data and indexes 
-    from Yahoo's Internet site.
-  
+     
 }
 
 
@@ -213,12 +175,9 @@ keystatsImport(query, file = "tempfile",
 
 
 \examples{
-\dontrun{    
+\dontrun{
 ## yahooImport -
-   # [test 19/20 century change 01-12-1999 -- 31-01-2000]
-   query = "s=IBM&a=11&b=1&c=1999&d=0&q=31&f=2000&z=IBM&x=.csv"
-   IBM = yahooImport(query)  
-   if (!is.null(IBM)) print(IBM@data[1:20, ])      
+   yahooSeries("IBM")
 }
 }
 

@@ -29,52 +29,61 @@
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
-#  economagicImport      Downloads market data from EconoMagic's web site
-#  economagicSeries      Easy to use download from EconoMagic
+#  economagicImport      Downloads market data from www.economagic.com
+#  economagicSeries      Easy to use download from www.economagic.com
 ################################################################################
 
-   
-test.economagic = 
-function()
+      
+test.economagicSeries <- 
+    function()
 {  
     if (FALSE) {
         
-        # economagicImport() - 
         # Daily Rates:
-        X = economagicImport(query = "fedny/day-fxus2eu", 
-            frequency = "daily", colname = "USDEUR")
-        checkIdentical(
-            target = X@data[6, 1], 
-            current = "1999-01-13")
-        checkIdentical(
-            target = X@data[6, 2], 
-            current = 1.1698)
-    
-        # economagicImport() - 
-        # Monthly Rates:
-        X = economagicImport(query = "fedstl/fedfunds+2", 
-             frequency = "monthly", colname = "USFEDFUNDS")
-        checkIdentical(
-            target = X@data[6, 1], 
-            current = "1955-02-01")
-        checkIdentical(
-            target = X@data[6, 2], 
-            current = 1.29)
+        X = economagicSeries(symbols = "fedny/day-fxus2eu")
+        print(head(X))
         
-        # economagicImport() - 
+        # Monthly Rates:
+        X = economagicSeries(symbols = "fedstl/fedfunds+2")
+        print(head(X))
+        
         # Quarterly Rates:
-        X = economagicImport(query = "fedstl/gnp", 
-            frequency = "quarterly", colname = "USGNP")
-        checkIdentical(
-            target = X@data[6, 1], 
-            current = "1948-12-01")
-        checkIdentical(
-            target = X@data[6, 2], 
-            current = 276.6)
+        X = economagicSeries(symbols = "fedstl/gnp")
+        print(head(X))
+        
+        # USDEUR Daily Foreign Exchange Rate:
+        X = economagicSeries(symbols = "fedny/day-fxus2eu")
+        print(head(X))
+    }
+         
+    # Return Value:
+    return()
+}
+
+
+# ------------------------------------------------------------------------------
+    
+       
+test.economagicImport <- 
+    function()
+{  
+    if (FALSE) {
+        
+        # Daily Rates:
+        X = economagicImport(query = "fedny/day-fxus2eu")
+        print(X)
+    
+        # Monthly Rates:
+        X = economagicImport(query = "fedstl/fedfunds+2")
+        print(X)
+        
+        # Quarterly Rates:
+        X = economagicImport(query = "fedstl/gnp")
+        print(X)
             
-        # economagicSeries() - 
-        # USDEUR Foreign Exchange Rate:
-        economagicSeries("fedny/day-fxus2eu", frequency = "daily")
+        # USDEUR Daily Foreign Exchange Rate:
+        X = economagicImport("fedny/day-fxus2eu")
+        print(X)
         
     }
          

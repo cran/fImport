@@ -12,53 +12,43 @@
 
 \description{
     
-    A collection and description of functions to import 
-    financial and economic market data from the Fred
-    Website.
-    \cr
-    
-    The functions are:
-    
-    \tabular{ll}{
-    \code{fredImport} \tab time series from St. Louis FRED Web site, \cr
-    \code{fredSeries} \tab easy to use download from St. Louis FRED}
+    Imports financial time series data from research.stlouisfed.org.
    
 }
 
 
 \usage{
-fredImport(query, file = "tempfile", 
-    source = "http://research.stlouisfed.org/fred2/series/", 
-    frequency = "daily", save = FALSE, sep = ";", try = TRUE) 
-  
-fredSeries(query = "DPRIME", frequency = "daily", returnClass = 
-    c("timeSeries", "ts", "matrix", "data.frame"), getReturns = FALSE, \dots)    
+fredSeries(symbols, from = NULL, to = Sys.timeDate(), 
+    nDaysBack = 366, \dots)
+    
+fredImport(query, file = "tempfile", source = NULL, frequency = "daily", 
+    from = NULL, to = Sys.timeDate(), nDaysBack = NULL,
+    save = FALSE, sep = ";", try = TRUE)    
 }
 
 
 \arguments{
 
-    \item{getReturns}{
-        a logical flag. Should return values be computed using the 
-        function \code{returnSeries}?
-        }
     \item{file}{
-        a character string with filename, usually
-        having extension ".csv", where to save the downloaded data.
+        a character string with filename, usually having extension 
+        ".csv", where to save the downloaded data.
         }
     \item{frequency}{
-        a character string, one of "quarterly", "monthly", or "daily",
-        defining the frequency of the data records.
+        a character string, one of "auto", "quarterly", "monthly", 
+        or "daily", defining the frequency of the data records.
+        Note, the import function tries autodetect the frequency
+        of the time series to be dowwnloaded. This may fail, in
+        such case specify the frequency explicitely.
+        }
+    \item{from} {
+        the date from when to extract the time series.
+        }
+    \item{nDaysBack}{
+        the number of days back.
         }
     \item{query}{
         a character string, denoting the location of the data at the 
         web site.
-        }
-    \item{returnClass}{
-        a character string naming the class of the object to be 
-        returned. By default the function returns 
-        a \code{"timeSeries"} object, alternatives are: \code{"ts"}, 
-        \code{"matrix"}, or \code{"data.frame"}.
         }
     \item{save}{
         a logical value, if set to TRUE the downloaded data file will 
@@ -66,12 +56,18 @@ fredSeries(query = "DPRIME", frequency = "daily", returnClass =
         string \code{file}. By default FALSE.
         }
     \item{sep}{
-        a character value, defining the field separator for the 
-        destination file which saves the downloaded data records.
-        By default a semicolon.
+        a charcter value specifying the column separator.
         }
-    \item{source}{
-        a character string with the download URL.
+    \item{source}{a character string setting the URL of the source.
+        If \code{NULL}, then the URL will be set automatically to its
+        default value.
+        }
+    \item{symbols} {
+        a character string with the symbols to be downloaded.
+        }
+    \item{to} {
+        the end date of the data download, by default the current 
+        date.
         }
     \item{try}{
         a logical value, if set to TRUE the Internet access will be
@@ -79,7 +75,8 @@ fredSeries(query = "DPRIME", frequency = "daily", returnClass =
         }
     \item{\dots}{
         optional arguments to be passed.
-        }        
+        }
+        
 }
 
 
@@ -118,7 +115,7 @@ fredSeries(query = "DPRIME", frequency = "daily", returnClass =
 \note{
   
     \bold{Internet Download Functions:}
-    \cr\cr
+    
     IMPORTANT NOTE: If the service provider changes the data file format 
     it may become necessary to modify and update the functions. 
   
@@ -134,11 +131,10 @@ fredSeries(query = "DPRIME", frequency = "daily", returnClass =
 \examples{
 \dontrun{
 ## fredImport -
-   DPRIME = fredImport("DPRIME")
-   if (!is.null(DPRIME)) print(DPRIME@data[1:20, ])       
+   DPRIME = fredSeries("DPRIME") 
+   tail(DPRIME)     
 }
 }
-
 
 \keyword{data}
 

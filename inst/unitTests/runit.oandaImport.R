@@ -28,32 +28,48 @@
 
 
 ################################################################################
-# FUNCTION:             DESCRIPTION:
-#  fredImport            Downloads market data from St. Louis FED web site
-#  fredSeries            Easy to use download from St. Louis FED  
+# FUNCTION:           
+#  test.oandaSeries  
+#  test.oandaImport           
 ################################################################################
 
-        
-test.fred = 
-function()
-{     
+      
+test.oandaSeries <- 
+    function()
+{  
     if (FALSE) {
         
-        # fredImport -
-        X = fredImport("DPRIME")
-        print(X) 
-        class(X)
-        
-        # fredSeries -     
-        X = fredSeries("DPRIME")
-        head(X)
-        class(X)
+        # Oanda:
+        X = oandaSeries(symbol = c("USD/EUR", "EUR/GBP"))
+        print(head(X))
+        print(class(X))
+
     }
+         
+    # Return Value:
+    return()
+}
+
+
+# ------------------------------------------------------------------------------
     
+       
+test.oandaImport <- 
+    function()
+{  
+    if (FALSE) {
+        
+        # oanda:
+        X = oandaImport("USD/EUR")  
+        print(X)
+        print(head(X@data))
+    
+    }
+         
     # Return Value:
     return()
 }
 
     
-################################################################################
+################################################################################\
 

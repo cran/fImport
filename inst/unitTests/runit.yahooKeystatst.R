@@ -28,36 +28,19 @@
 
 
 ################################################################################
-# FUNCTION:             DESCRIPTION:
-#  yahooImport           Downloads market data from Yahoo's web site  
-#  yahooSeries           Easy to use download from Yahoo  
-#  keystatsImport        Downloads key statistics from Yahoo's web site                    S-PLUS: Splits character vector into substrings
+# FUNCTION:             DESCRIPTION: 
+#  yahooKeystats         Downloads key statistics from chart.yahoo.com  
 ################################################################################
 
-        
-test.yahoo = 
-function()
+
+test.yahooKeyStats <- 
+    function()
 {       
     if (FALSE) {
-    
-        # yahooImport() -
-        # [test 19/20 century change 01-12-1999 -- 31-01-2000]
-        query = "s=IBM&a=11&b=29&c=1999&d=0&e=5&f=2000&z=IBM&x=.csv"
-        X = yahooImport(query)  
-        checkIdentical(
-            target = as.vector(X@data[3:4, 1]), 
-            current = c("1999-12-31", "2000-01-03"))
-        checkIdentical(
-            target = as.numeric(sum(X@data[, "Volume"])), 
-            current = 40297400)
-             
-        # keystatsImport() - 
-        keystatsImport("IBM")  
-        # ... html Format problems, now works
         
-        # yahooSeries() -
-        args(yahooSeries)
-        yahooSeries()
+        # Yahoo Key Statistics:
+        ans = yahooKeystats("IBM")
+        print(ans)
         
     }
         

@@ -29,28 +29,21 @@
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
-#  forecastsImport       Downloads monthly data from www.forecasts.org 
-#  forecastsSeries       Easy to use download from www.forecasts.org   
+#  yahooBriefing         Downloads briefings from chart.yahoo.com  
 ################################################################################
-       
-        
-test.forecasts = 
-function()
-{     
+
+
+test.yahooBriefing <- 
+    function()
+{       
     if (FALSE) {
         
-        # fredImport -
-        X = forecastsImport("GOLD")
-        print(X) 
-        class(X)
-        
-        # fredSeries -     
-        X = forecastsSeries("GOLD")
-        head(X)
-        class(X)
+        # Yahoo Key Briefing:
+        ans = yahooBriefing("IBM")
+        print(ans)
         
     }
-    
+        
     # Return Value:
     return()
 }

@@ -1,68 +1,73 @@
-\name{Forecasts}
+\name{Oanda}
 
-\alias{Forecasts}
-
-\alias{forecastsImport}
-\alias{forecastsSeries}
+\alias{Oanda}
 
 
-\title{Import Market Data from www.forecasts.org}
+\alias{oandaImport}
+\alias{oandaSeries}
+
+
+\title{Import FX Market Data from OANDA}
 
 
 \description{
     
-    A collection and description of functions to import 
-    financial and economic market data from the
-    www.forecast.org web site.
-    \cr
-    
-    The functions are:
-    
-    \tabular{ll}{
-    \code{forecastsImport} \tab monthly data from the Financial Forecast Center, \cr 
-    \code{forecastsSeries} \tab easy to use download from Financial Forecast Center.}
+    Imports FX market data from www.oanda.com.
    
 }
 
 
 \usage{
-forecastsImport(query, file = "tempfile", 
-    source = "http://www.forecasts.org/data/data/", save = FALSE, 
-    try = TRUE) 
-      
-forecastsSeries(query, returnClass = c("timeSeries", "ts", "matrix", 
-    "data.frame"), getReturns = FALSE, \dots)    
+oandaSeries(symbols, from = NULL, to = Sys.timeDate(), 
+    nDaysBack = 366, \dots) 
     
+oandaImport(query, file = "tempfile", source = NULL, frequency = "daily", 
+    from = NULL, to = Sys.timeDate(), nDaysBack = 366, 
+    save = FALSE, sep = ";", try = TRUE) 
 }
 
 
 \arguments{
 
-    \item{getReturns}{
-        a logical flag. Should return values be computed using the 
-        function \code{returnSeries}?
+        \item{file}{
+        a character string with filename, usually having extension 
+        ".csv", where to save the downloaded data.
         }
-    \item{file}{
-        a character string with filename, usually
-        having extension ".csv", where to save the downloaded data.
+    \item{frequency}{
+        a character string, one of "auto", "quarterly", "monthly", 
+        or "daily", defining the frequency of the data records.
+        Note, the import function tries autodetect the frequency
+        of the time series to be dowwnloaded. This may fail, in
+        such case specify the frequency explicitely.
+        }
+    \item{from} {
+        the date from when to extract the time series.
+        }
+    \item{nDaysBack}{
+        the number of days back.
         }
     \item{query}{
         a character string, denoting the location of the data at the 
         web site.
-        }
-    \item{returnClass}{
-        a character string naming the class of the object to be 
-        returned. By default the function returns 
-        a \code{"timeSeries"} object, alternatives are: \code{"ts"}, 
-        \code{"matrix"}, or \code{"data.frame"}.
         }
     \item{save}{
         a logical value, if set to TRUE the downloaded data file will 
         be stored under the path and file name specified by the
         string \code{file}. By default FALSE.
         }
-    \item{source}{
-        a character string with the download URL.
+    \item{sep}{
+        a charcter value specifying the column separator.
+        }
+    \item{source}{a character string setting the URL of the source.
+        If \code{NULL}, then the URL will be set automatically to its
+        default value.
+        }
+    \item{symbols} {
+        a character string with the symbols to be downloaded.
+        }
+    \item{to} {
+        the end date of the data download, by default the current 
+        date.
         }
     \item{try}{
         a logical value, if set to TRUE the Internet access will be
@@ -70,13 +75,14 @@ forecastsSeries(query, returnClass = c("timeSeries", "ts", "matrix",
         }
     \item{\dots}{
         optional arguments to be passed.
-        }        
+        }
+        
 }
 
 
 \value{
 
-    The function \code{forecastsImport} returns an S4 object of class 
+    The function \code{fredImport} returns an S4 object of class 
     \code{fWEBDATA} with the following slots:
     
     \item{@call}{
@@ -98,7 +104,7 @@ forecastsSeries(query, returnClass = c("timeSeries", "ts", "matrix",
         By default just the current date when the test was applied will
         be returned.}
         
-    The function \code{forecastsSeries} returns an S4 object of 
+    The function \code{fredSeries} returns an S4 object of 
     class  \code{timeSeries} or alternatively an object specified by
     the function argument \code{returnClass}.
     \cr
@@ -110,6 +116,7 @@ forecastsSeries(query, returnClass = c("timeSeries", "ts", "matrix",
   
     \bold{Internet Download Functions:}
     \cr\cr
+    
     IMPORTANT NOTE: If the service provider changes the data file format 
     it may become necessary to modify and update the functions. 
   
@@ -124,11 +131,10 @@ forecastsSeries(query, returnClass = c("timeSeries", "ts", "matrix",
 
 \examples{
 \dontrun{
-## forecastsImport -
-   NA
+## oandaImport -
+   oandaSeries("USD/EUR")      
 }
 }
-
 
 \keyword{data}
 

@@ -18,36 +18,41 @@
 # for this R-port:
 #   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   info@rmetrics.org
 #   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
 
 
 ################################################################################
+# FUNCTION:             DESCRIPTION:
+#  show,fWEBDATA         S4 Show Method for WEB downloaded data
+################################################################################
 
 
-.First.lib =
-function(lib, pkg)
+setMethod("show", signature(object = "fWEBDATA"), definition =
+    function(object)
 {
-   ##  # Startup Mesage and Desription:
-##     MSG <- if(getRversion() >= "2.5") packageStartupMessage else message
-##     dsc <- packageDescription(pkg)
-##     if(interactive() || getOption("verbose")) {
-##         # not in test scripts
-##         MSG(sprintf("Rmetrics Package %s (%s) loaded.", pkg, dsc$Version))
-##     }
+    # A function implemented by Diethelm Wuertz
 
-    # Load dll:
-    # library.dynam("fImport", pkg, lib)
-}
+    # FUNCTION:
 
+    # Unlike print the argument for show is 'object'.
+    x = object
 
-if(!exists("Sys.setenv", mode = "function")) # pre R-2.5.0, use "old form"
-    Sys.setenv <- Sys.putenv
+    # Title:
+    cat("\nTitle:\n ", object@title, "\n", sep = "")
+
+    # Parameter:
+    cat("\nParameter:\n ")
+    param = cbind(object@param)
+    colnames(param) = "Value:"
+    print(param, quotes = FALSE)
+
+    # Description:
+    cat("\nDescription:\n ", object@description, sep = "")
+    cat("\n\n")
+
+    # Return Value:
+    invisible()
+})
 
 
 ################################################################################
