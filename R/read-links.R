@@ -21,15 +21,39 @@
 
 ################################################################################
 # FUNCTION:               DESCRIPTION:
-#  read.lines              A synonyme function call to readLines
+#  read.lynx               Uses the links browser to read from a web page
 ################################################################################
 
-# wrapper function of read.lines to have consistent function names as
-# described in ebook.
 
-read.lines <- function(con = stdin(), n = -1L, ok = TRUE, warn = FALSE,
-                       encoding = "unknown")
-    readLines(con = con, n = n, ok = ok, warn = warn, encoding = encoding)
+read.links <-
+function (url, intern = TRUE, bin = NULL, pipe = FALSE, ...) 
+{
+    # A function implemented by Diethelm Wuertz and Yohan Chalabi
+
+    # Description:
+    #   Uses the links browser to read from a web page
+    
+    # Example:
+    #   read.lynx("www.rmetrics.org", bin = "C:/cygwin/bin/lynx.exe")
+    
+    # FUNCTION:
+
+    # Paste Arguments:
+    ldots <- list(...)
+    args <- if (length(ldots)) 
+        paste(paste("-", names(ldots), "=", sep = ""), ldots, 
+            sep = "", collapse = " ")
+    else ""
+    cmd <- if (is.null(bin)) 
+        paste("links", args, "-dump", shQuote(url))
+    else paste(bin, args, "-dump", shQuote(url))
+    ans <- if (pipe) 
+        pipe(cmd)
+    else 
+        system(cmd, intern = intern)
+    ans
+}
+
 
 ################################################################################
 

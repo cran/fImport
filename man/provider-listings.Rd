@@ -1,4 +1,5 @@
-\name{providerListings}
+\name{provider-Listings}
+
 
 \alias{providerListings}
 
@@ -26,6 +27,16 @@
     
     All files are in CSV Excel spreadsheet format. The
     delimiter is a semicolon. 
+    
+}
+
+
+\references{
+
+Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
+    \emph{Financial Market Data for R/Rmetrics}, 
+    Rmetrics eBook, Rmetrics Association and Finance Online, Zurich,
+    www.rmetrics.org.
     
 }
  

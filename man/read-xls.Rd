@@ -1,4 +1,4 @@
-\name{read.xls}
+\name{read-xls}
 
 
 \alias{read.xls}
@@ -46,6 +46,16 @@ read.xls(url, sheet=1, lines=-1, verbose=FALSE, encoding="unknown")
 
     the downloaded text.
 
+}
+
+
+\references{
+
+Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
+    \emph{Financial Market Data for R/Rmetrics}, 
+    Rmetrics eBook, Rmetrics Association and Finance Online, Zurich,
+    www.rmetrics.org.
+    
 }
 
 

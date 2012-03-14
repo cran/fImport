@@ -21,20 +21,20 @@
 
 ################################################################################
 # FUNCTION:               DESCRIPTION:
-#  read.lynx               Uses the lynx browser to read from a web page
+#  read.w3m                Uses the w3m browser to read from a web page
 ################################################################################
 
 
-read.lynx <- 
-    function(url, intern = TRUE, bin = NULL, pipe = FALSE, ...) 
+read.w3m <- 
+function(url, intern = TRUE, bin = NULL, pipe = FALSE, ...) 
 {
     # A function implemented by Diethelm Wuertz and Yohan Chalabi
 
     # Description:
-    #   Uses the lynx browser to read from a web page
+    #   Uses the w3m browser to read from a web page
     
     # Example:
-    #   read.lynx("www.rmetrics.org", bin = "C:/cygwin/bin/lynx.exe")
+    #   read.w3m("www.rmetrics.org", bin = "C:/cygwin/bin/w3m.exe")
     
     # FUNCTION:
 
@@ -50,9 +50,9 @@ read.lynx <-
     # Compose Command:
     cmd <-
         if (is.null(bin))
-            paste("lynx", args, "-dump -dont_wrap_pre", shQuote(url))
+            paste("w3m", args, "-dump", shQuote(url))
         else
-            paste(bin, args, "-dump -dont_wrap_pre", shQuote(url))
+            paste(bin, args, "-dump", shQuote(url))
 
     # Download URL:
     ans <-

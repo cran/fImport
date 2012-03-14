@@ -1,29 +1,29 @@
-\name{Oanda}
+\name{import-fred}
 
-\alias{Oanda}
-
-
-\alias{oandaImport}
-\alias{oandaSeries}
+\alias{import-fred}
 
 
-\title{Import FX Market Data from OANDA}
+\alias{fredImport}
+\alias{fredSeries}
+
+
+\title{Import Market Data from the Fred}
 
 
 \description{
     
-    Imports FX market data from www.oanda.com.
+    Imports financial time series data from research.stlouisfed.org.
    
 }
 
 
 \usage{
-oandaSeries(symbols, from = NULL, to = Sys.timeDate(), 
-    nDaysBack = 366, \dots) 
+fredSeries(symbols, from = NULL, to = Sys.timeDate(), 
+    nDaysBack = 366, \dots)
     
-oandaImport(query, file = "tempfile", source = NULL, frequency = "daily", 
-    from = NULL, to = Sys.timeDate(), nDaysBack = 366, 
-    save = FALSE, sep = ";", try = TRUE) 
+fredImport(query, file = "tempfile", source = NULL, frequency = "daily", 
+    from = NULL, to = Sys.timeDate(), nDaysBack = NULL,
+    save = FALSE, sep = ";", try = TRUE)    
 }
 
 
@@ -115,7 +115,6 @@ oandaImport(query, file = "tempfile", source = NULL, frequency = "daily",
 \note{
   
     \bold{Internet Download Functions:}
-    \cr\cr
     
     IMPORTANT NOTE: If the service provider changes the data file format 
     it may become necessary to modify and update the functions. 
@@ -129,12 +128,15 @@ oandaImport(query, file = "tempfile", source = NULL, frequency = "daily",
 }
 
 
-\examples{
-\dontrun{
-## oandaImport -
-   oandaSeries("USD/EUR")      
+\references{
+
+Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
+    \emph{Financial Market Data for R/Rmetrics}, 
+    Rmetrics eBook, Rmetrics Association and Finance Online, Zurich,
+    www.rmetrics.org.
+    
 }
-}
+
 
 \keyword{data}
 

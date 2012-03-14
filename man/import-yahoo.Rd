@@ -1,6 +1,6 @@
-\name{Yahoo}
+\name{import-yahoo}
 
-\alias{Yahoo}
+\alias{import-yahoo}
 
 \alias{yahooImport}
 \alias{yahooSeries}
@@ -174,11 +174,13 @@ yahooImport(query, file = "tempfile", source = NULL,
 }
 
 
-\examples{
-\dontrun{
-## yahooImport -
-   yahooSeries("IBM")
-}
+\references{
+
+Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
+    \emph{Financial Market Data for R/Rmetrics}, 
+    Rmetrics eBook, Rmetrics Association and Finance Online, Zurich,
+    www.rmetrics.org.
+    
 }
 
 

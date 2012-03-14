@@ -1,21 +1,21 @@
-\name{read-lynx}
+\name{read-links}
 
 
-\alias{read.lynx}
+\alias{read.links}
 
 
-\title{Lynx Browser interface}
+\title{Links Browser interface}
 
 
 \description{
 
-    Uses the Lynx Browser to read a web page. 
+    Uses the Links Text Browser to read a web page. 
     
 }
 
 
 \usage{
-read.lynx(url, intern = TRUE, bin = NULL, pipe = FALSE, \dots)
+read.links(url, intern = TRUE, bin = NULL, pipe = FALSE, \dots)
 }
 
 
@@ -37,10 +37,7 @@ read.lynx(url, intern = TRUE, bin = NULL, pipe = FALSE, \dots)
         as a \code{pipe()} commmand.
     }
     \item{\dots}{
-        optional arguments passed to lynx binary. For example
-        \code{accept_all_cookies = TRUE} or
-        \code{cookie_file="~/.lynx_cookies"}. For a list of options, see
-        the lynx manual page.
+        optional arguments passed to links binary.
     }
 }
 
@@ -53,12 +50,10 @@ read.lynx(url, intern = TRUE, bin = NULL, pipe = FALSE, \dots)
 
 
 \references{
-
 Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
     \emph{Financial Market Data for R/Rmetrics}, 
     Rmetrics eBook, Rmetrics Association and Finance Online, Zurich,
     www.rmetrics.org.
-    
 }
 
 

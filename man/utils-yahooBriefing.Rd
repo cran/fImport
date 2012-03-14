@@ -1,22 +1,21 @@
-\name{YahooKeystats}
+\name{utils-yahooBriefing}
 
 
-\alias{yahooKeystats}
+\alias{yahooBriefing}
 
 
-\title{Import Key Statistics Data from Yahoo}
+\title{Import Briefings from Yahoo}
 
 
 \description{
     
-    Imports key statistics from chart.yahoo.com.
+    Imports briefings from chart.yahoo.com.
    
 }
 
 
 \usage{ 
-yahooKeystats(query, file = "tempfile", source = NULL, save = FALSE, 
-    try = TRUE) 
+yahooBriefing(query, file = "tempfile", source = NULL, save = FALSE, try = TRUE) 
 }
 
 
@@ -50,29 +49,22 @@ yahooKeystats(query, file = "tempfile", source = NULL, save = FALSE,
 \value{
 
     returns a data frame with 
-    key statistics downloaded from yahoo's web site.
+    briefings downloaded from yahoo's web site.
     
 }
 
-
-\note{
-
-    Function \code{yohooKeystats} has been renamed from \code{keystatsImport}.
-
-}
-    
 
 \author{
-
     Diethelm Wuertz for the Rmetrics \R-port.
 }
 
 
-\examples{
-\dontrun{
-## yahooKeystats -
-   yahooKeystats("IBM")
-}
+\references{
+Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
+    \emph{Financial Market Data for R/Rmetrics}, 
+    Rmetrics eBook, Rmetrics Association and Finance Online, Zurich,
+    www.rmetrics.org.
+    
 }
 
 

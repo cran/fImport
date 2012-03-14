@@ -1,21 +1,21 @@
-\name{read-lynx}
+\name{read-w3m}
 
 
-\alias{read.lynx}
+\alias{read.w3m}
 
 
-\title{Lynx Browser interface}
+\title{w3m Browser interface}
 
 
 \description{
 
-    Uses the Lynx Browser to read a web page. 
+    Uses the w3m Browser to read a web page. 
     
 }
 
 
 \usage{
-read.lynx(url, intern = TRUE, bin = NULL, pipe = FALSE, \dots)
+read.w3m(url, intern = TRUE, bin = NULL, pipe = FALSE, \dots)
 }
 
 
@@ -29,18 +29,16 @@ read.lynx(url, intern = TRUE, bin = NULL, pipe = FALSE, \dots)
         of the command an R object. 
     }
     \item{bin}{
-        a string with the path of your lynx binary or NULL if lynx
+        a string with the path of your w3m binary or NULL if w3m
         binary is available in the operating system path.
       }
       \item{pipe}{
-    a logical which indicates whether the result should be returned
+	a logical which indicates whether the result should be returned
         as a \code{pipe()} commmand.
-    }
+	}
     \item{\dots}{
-        optional arguments passed to lynx binary. For example
-        \code{accept_all_cookies = TRUE} or
-        \code{cookie_file="~/.lynx_cookies"}. For a list of options, see
-        the lynx manual page.
+        optional arguments passed to w3m binary. 
+        For a list of options, see the w3m manual page.
     }
 }
 
