@@ -1,7 +1,7 @@
-58b9da6f48188b5e6d340810eb5b5bca *ChangeLog
-eec21aa2b68a63744aeeda9a0876e901 *DESCRIPTION
+22709eaf431b727b40990525a60880ae *ChangeLog
+2a5772be068edbee1f23387ff4cf5899 *DESCRIPTION
 572c0bc4ab8114fe4564047da45f7704 *NAMESPACE
-f46a20c2c7649c221cecb7c58a6e9c14 *R/builtin-xlsGdata.R
+4943edaa3e07e213da1d4c4c2da250e4 *R/builtin-xlsGdata.R
 ed967b1e07f635b23aee8e7903238314 *R/class-fWEBDATA.R
 0dbf7b63f8b2e43bb2112051b09215a0 *R/import-fred.R
 ddaeec726cb8aff6bde3bcd8bfbc1527 *R/import-oanda.R
@@ -15,7 +15,7 @@ a2a223c51b49ca03c633c4f8c8c42384 *R/read-links.R
 741b8c0c29e515f559e312b8a1d5e207 *R/read-w3m.R
 822d2b5aadb43ce2c8fe9e7f980f786f *R/read-xls.R
 eeea1f3173a8922eb62c6b40c3d0a364 *R/utils-yahoo.R
-3d86f0706fb2c57b7771a666639f3098 *R/zzz.R
+4e1bef3c6ce229ac6f7e6719c16a1960 *R/zzz.R
 eb67e9393d7b73a41874d38d88598379 *data/amexListing.csv.gz
 ffb69a6101e6aeb8bc9c656037d7a5f9 *data/h15Listing.csv.gz
 2ee3619a6ce1fa8543e4c4829162c6fa *data/nasdaqListing.csv.gz
