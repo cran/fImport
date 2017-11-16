@@ -1,29 +1,29 @@
-\name{import-fred}
+\name{import-oanda}
 
-\alias{import-fred}
-
-
-\alias{fredImport}
-\alias{fredSeries}
+\alias{import-oanda}
 
 
-\title{Import Market Data from the Fred}
+\alias{oandaImport}
+\alias{oandaSeries}
+
+
+\title{Import FX Market Data from OANDA}
 
 
 \description{
     
-    Imports financial time series data from research.stlouisfed.org.
+    Imports FX market data from www.oanda.com.
    
 }
 
 
 \usage{
-fredSeries(symbols, from = NULL, to = Sys.timeDate(), 
-    nDaysBack = 366, \dots)
+oandaSeries(symbols, from = NULL, to = Sys.timeDate(), 
+    nDaysBack = 366, \dots) 
     
-fredImport(query, file = "tempfile", source = NULL, frequency = "daily", 
-    from = NULL, to = Sys.timeDate(), nDaysBack = NULL,
-    save = FALSE, sep = ";", try = TRUE)    
+oandaImport(query, file = "tempfile", source = NULL, frequency = "daily", 
+    from = NULL, to = Sys.timeDate(), nDaysBack = 366, 
+    save = FALSE, sep = ";", try = TRUE) 
 }
 
 
@@ -105,7 +105,7 @@ fredImport(query, file = "tempfile", source = NULL, frequency = "daily",
         be returned.}
         
     The function \code{fredSeries} returns an S4 object of 
-    class \code{timeSeries} or alternatively an object specified by
+    class  \code{timeSeries} or alternatively an object specified by
     the function argument \code{returnClass}.
     \cr
     
@@ -115,23 +115,24 @@ fredImport(query, file = "tempfile", source = NULL, frequency = "daily",
 \note{
   
     \bold{Internet Download Functions:}
+    \cr\cr
     
     IMPORTANT NOTE: If the service provider changes the data file format 
-    it may become necessary to modify and update the functions. 
+    it may become necessary to modify and update the functions.
     
     Feel free to inspect the code of the functions and to create your
-    own download function from other Internet web sites and Portals.
+    own download function from other Internet web sites and Portals. 
   
 }
 
 
-%\seealso{
-%       
-%    Two further download functions \code{\link{oandaImport}} and 
-%    \code{\link{yahooImport}} allow to import data from Oanda and 
-%    from Yahoo Finance.
-%     
-%}
+\seealso{
+       
+    Two further download functions \code{\link{fredImport}} and 
+    \code{\link{yahooImport}} allow to import data from the U.S.
+    Federal Reserve and from Yahoo Finance.
+     
+}
 
 
 \author{
@@ -151,8 +152,8 @@ Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
 
 
 \examples{
-fredImport("DEXSZUS")
-fredSeries("DEXSZUS")
+oandaImport("USD/CHF")
+oandaSeries("USD/CHF")
 }
 
 

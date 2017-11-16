@@ -17,57 +17,47 @@
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
-#  fredImport            Downloads market data from research.stlouisfed.org
-#  fredSeries            Easy to use download from research.stlouisfed.org
+#  oandaImport           Downloads market data from www.oanda.com
+#  oandaSeries           Easy to use download from www.oanda.com
 ################################################################################
 
 
-fredImport <-
+oandaImport <-
   function(query, file = "tempfile", source = NULL,
            frequency = "daily",
-           from = NULL, to = Sys.timeDate(), nDaysBack = NULL,
+           from = NULL, to = Sys.timeDate(), nDaysBack = 366,
            save = FALSE, sep = ";", try = TRUE)
   {
     # A function implemented by Diethelm Wuertz
     
     # Description:
-    #   Downloads Monthly Market Data, Indices and Benchmarks from
-    #   St. Louis FED, "research.stlouisfed.org".
+    #   Downloads market data from www.oanda.com
+    
+    # Example:
+    #   oandaImport("USD/EUR")
     
     # Value:
     #   An One Column data frame with row names denoting the dates
     #   given in the POSIX format "%Y%m%d". The column lists the
     #   downloaded data records.
     
-    # Examples:
-    #   fredImport("DPRIME")
-    
-    # Notes:
-    #   This function is written for one-column daily data sets.
-    #   Some example data sets include:
-    #     DEXUSEU   U.S. / Euro Foreign Exchange Rate
-    #     DEXSZUS   Switzerland / U.S. Foreign Exchange Rate
-    #     DGS1      1-Year Treasury Constant Maturity Rate
-    #     DPRIME    Bank Prime Loan Rate
-    
     # FUNCTION:
     
     # Settings:
     stopifnot(length(query) == 1)
     
-    # Source"
-    if (is.null(source))
-      source = "http://research.stlouisfed.org/fred2/series/"
-    
     # Check:
-    if (frequency != "daily")
-      stop("Only daily data records are supported!")
+    stopifnot(frequency == "daily")
+    
+    # Source:
+    if (is.null(source))
+      source <- "http://www.oanda.com/currency/historical-rates/download?&"
     
     # Download:
     if (try) {
       # Try for Internet Connection:
-      z = try(fredImport(query, file, source, frequency, from, to,
-                         nDaysBack, save, sep, try = FALSE))
+      z <- try(oandaImport(query, file, source, frequency, from, to,
+                           nDaysBack, save, sep, try = FALSE))
       if (inherits(z, "try-error") || inherits(z, "Error")) {
         return("No Internet Access")
       } else {
@@ -75,38 +65,51 @@ fredImport <-
       }
     } else {
       # Download File:
-      queryFile = paste(query, "/downloaddata/", query, ".txt", sep = "")
-      url = paste(source, queryFile, sep = "")
-      tmp = tempfile()
-      download.file(url = url, destfile = tmp)
-      
-      # Scan the file:
-      x1 = scan(tmp, what = "", sep = "\n")
-      
-      # Extract dates ^19XX and ^20XX:
-      x2 = x1[regexpr(pattern="^[12][90]", x1, perl=TRUE) > 0]
-      x1 = x2[regexpr(pattern=" .$", x2, perl=TRUE) < 0]
-      
-      # Compose Time Series:
-      data <- matrix(
-        as.numeric(substring(x1, 11, 999)), byrow = TRUE, ncol = 1)
-      charvec <- substring(x1, 1, 10)
-      X <- timeSeries(data, charvec, units = query)
-      
-      # Time Window:
       if (is.null(to)) to <- Sys.timeDate()
       to <-  trunc(as.timeDate(to),"days")
       
       if (is.null(from)) {
         if (is.null(nDaysBack)) {
-          from <- start(X)
+          stop("The \"from\" and \"nDaysBack\" arguments cannot be NULL at the same time.")
         } else {
           from <- to - nDaysBack*24*3600
         }
       }
       from <- trunc(as.timeDate(from),"days")
       
-      X <- window(X, from, to)
+      from.date <- as.character(from)
+      to.date <- as.character(to)
+      
+      ccy.pair <- strsplit(toupper(query),"/")[[1]]
+      tmp <- tempfile()
+      
+      url <- paste0(source, 
+                    "quote_currency=", ccy.pair[1], 
+                    "&end_date=", to.date, "&start_date=", from.date, 
+                    "&period=daily", "&display=absolute", "&rate=0", 
+                    "&data_range=", "c", "&price=mid", "&view=table", 
+                    "&base_currency_0=", ccy.pair[2],
+                    "&base_currency_1=", "&base_currency_2=", "&base_currency_3=", "&base_currency_4=",
+                    "&download=csv")
+      
+      download.file(url=url, destfile=tmp)
+      # add an EOL to the file to avoid the warning message
+      #cat("\n",file=tmp,append=TRUE)
+      
+      ## Compose Time Series:
+      # fx <- read.csv(tmp, skip = 4, as.is = TRUE, header = TRUE)
+      
+      fl <- scan(tmp, what = "", sep = "\n", quote="\"")
+      begin <- grep(paste(ccy.pair,collapse="/"),fl)
+      fl <- fl[begin:length(fl)]
+      
+      fx <- matrix(unlist(strsplit(fl,split=",")), nrow=length(fl), byrow=TRUE)[-1,1:2]
+      dates <- !is.na(as.Date(fx[,1]))
+      fx <- fx[dates,]
+      
+      data <- rev(as.numeric(fx[,2]))
+      charvec <- rev(as.character((fx[,1])))
+      X <- timeSeries(data, charvec, units = query)
     }
     
     # Save to file:
@@ -123,7 +126,7 @@ fredImport <-
                  "Instrument" = query,
                  "Frequency " = frequency),
                data = X,
-               title = "Data Import from research.stlouisfed.org",
+               title = "Data Import from www.oanda.com",
                description = description() )
     
     # Return Value:
@@ -132,13 +135,13 @@ fredImport <-
 
 
 # ------------------------------------------------------------------------------
-fredSeries <-
+oandaSeries <-
   function(symbols, from = NULL, to = Sys.timeDate(), nDaysBack = 366, ...)
   {
     # A function implemented by Diethelm Wuertz
     
     # Description:
-    #   Downloads easily time series data from St. Louis FRED
+    #   Easy to use download from www.oanda.com
     
     # Arguments:
     #   symbols - a character vector of symbol names
@@ -147,19 +150,20 @@ fredSeries <-
     #   nDaysBack - number of n-days back
     #   ... - arguments passed to the *Import()
     
-    # Examples:
-    #   fredSeries("DPRIME")[1:10, ]
+    # Example:
+    #   oandaSeries("USD/EUR")
+    #   oandaSeries(c("USD/EUR", "USD/JPY"), nDaysBack = 10)
     
     # FUNCTION:
     
     # Download:
-    X <- fredImport(query = symbols[1],
-                    from = from, to = to, nDaysBack=nDaysBack, ...)@data
+    X <- oandaImport(query = symbols[1],
+                     from = from, to = to, nDaysBack=nDaysBack, ...)@data
     N <- length(symbols)
     if (N > 1) {
       for (i in 2:N) {
-        X <- merge(X, fredImport(query = symbols[i],
-                                 from = from, to = to, nDaysBack=nDaysBack, ...)@data)
+        X <- merge(X, oandaImport(query = symbols[i],
+                                  from = from, to = to, nDaysBack=nDaysBack, ...)@data)
       }
     }
     
@@ -167,7 +171,5 @@ fredSeries <-
     X
   }
 
-
 ################################################################################
-
 

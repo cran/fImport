@@ -2,8 +2,6 @@
 
 
 \alias{fImport-package}
-
-
 \alias{fImport}
 
 
@@ -15,8 +13,10 @@
 
 \description{
 
-    Package of utility functions to download and manage data sets
-    from the Internet or from other sources.
+    The Rmetrics "fImport" package is a collection of utility functions 
+    to download and manage data sets from the Internet or from other 
+    sources.
+    
 }
 
 
@@ -25,115 +25,101 @@
     \tabular{ll}{
         Package:    \tab fImport\cr
         Type:       \tab Package\cr
-        Date:       \tab 2008, 2009, 2010\cr
+        Version:    \tab R 3.1.2\cr
+        Date:       \tab 2015\cr
         License:    \tab GPL Version 2 or later\cr
-        Copyright:  \tab (c) 1999-2008 Diethelm Wuertz and Rmetrics Foundation\cr
-        URL:        \tab \url{http://www.rmetrics.org}
+        Copyright:  \tab (c) 1999-2015 Rmetrics Assiciation\cr
+        URL:        \tab \url{https://www.rmetrics.org}
     }
     
-    The package contains:
-    
-    1) Three example import funcions for Yahoo, Oanda, and the Federal Reserve.
-    
-    2) Several utility functions to read and write data, including functions
-    which allow system calls to the \code{Links}, \code{Lynx}, and \code{W3M} 
-    text browser, and a function to read \code{xls} Excel files.
-    
-    3) Several csv files with provider listings.
-      
 }
+
+
+\section{1 Introduction}{
     
-  
-\section{Overview on Time Series Data:}{
+    The major content of this package is to provide download functions 
+    for financial market data from the Internet. For this we have 
+    implemented the web text browsers "Lynx"", "Links"", and "W3M"" 
+    for an easy and straightforward download of data from the Internet.   
+    
+    Furthermore helpful utility functions are included to split numerical 
+    data matrices, to split date character vectors, and to split strings 
+    from downloads. This allows to create in a very easy way 
+    \code{timeSeries} objects.
+    
+    Examples are provided for downloading data from the Federal Reserve
+    data base in St. Louis web portal.
+    % from Oanda FX, and from Yahoo Finance
+    
+    The data part contains instruments listings from the American Stock 
+    Exchange, from the FED H15 Report, from the NASDAQ Stock Market,
+    from the New York Stock Exchange, of OANDAs Foreign Exchange Rates,
+    of STOXX Indices, and from the Swiss Stock Exchange.
+       
+    For the download of spread sheets from the Internet we refer to the 
+    functions \code{gdata::read.xls} and \code{xlsx::read.xlsx} for the 
+    contributed \R packages \code{gdata} and \code{xlsx} respectively.
+    
+}
+
+
+\section{2 Download Functions}{
 
     The package makes functions available to download financial market
-    data from the internet. Functions are available for the 
-    follwing web sites:
+    data from the internet. Currently functions are available for the 
+    follwing web sites. The functions are:
     
-    1. Data from research.stlouisfed.org\cr
-    2. Data from www.oanda.com\cr
-    3. Data from chart.yahoo.com
+    \preformatted{
+    fredSeries      downloads data from research.stlouisfed.org
+    %oandaSeries     downloads data from www.oanda.com
+    %yahooSeries     downloads data from chart.yahoo.com
+    }
     
-    There are two kinds of functions available, the first kind is called 
-    \code{*Series} which downloads a \code{"timeSeries"} object from a
-    web site wher the star \code{*} is a placeholder for the web site
-    (fred, oanda, and yahoo), and the second kind is called
-    \code{*Import} which downloads an S4 object of class \code{"fWEBDATA"}
-    wit a \code{@Data} slot which keeps the \code{"timeSeries"} object
-    and further slots which keep additional download information.
+    The economic and financial time series data are extractes as objects 
+    of class \code{"timeSeries"}.   
+
+}
+
+
+\section{2 Readers and Web downloaders}{
+
+    The package comes with the folowwing tailored readers and web 
+    downloaders:
     
-    We recommend the first kind of functions for easy download of economic
-    and financial time series, whereas we recommend to use the second kind
-    of functions when additional information is required for example for
-    the storage of the data in a data base management system.
+    \preformatted{
+    read.lines      a synonyme function call to readLines
+    read.links      uses the links browser to read from a web page
+    read.lynx       uses the lynx browser to read from a web page
+    read.w3m        uses the w3m browser to read from a web page
+    }
+
+}
+
+
+\section{3 Split Function Utilities}{
+
+    This section provides functions to split numerical data matrices, 
+    to split date character vectors, and to split strings 
+    from downloads:
     
-    IMPORTANT NOTE: The download from the web site www.forecasts.org has
-    been withdrawn since the time series are no longer updated. Note, all 
-    the series offered by the "forecasts.org" web site are also available
-    from the FRED St. Louis database.
+    \preformatted{
+    dataSplit       splits a data matrix from a downloaded file
+    charvecSplit    splits a charvec vector from a downloaded file
+    stringSplit     splits a string vector from a downloaded file
+    }
+
+}
+
+
+\section{About Rmetrics}{
+
+    The \code{fImport} Rmetrics package is written for educational 
+    support in teaching "Computational Finance and Financial Engineering" 
+    and licensed under the GPL.
     
 }
 
 
-\section{Downloading 'timeSeries' Objects:}{
-
-    The following functions 
-
-    1. fredSeries\cr
-    2. oandaSeries\cr
-    3. yahooSeries
-    
-    allow for an easy download of economic and financial time series data 
-    as objects of class \code{"timeSeries"}.   
-    
-    Note, with version 280.73 major changes were made in the argument list of 
-    the downloading functions. We apologize for any inconveniences caused
-    by these changes. The reason was that now all functions have the same
-    arguments which makes their usage much easier. For details we refer to 
-    the help pages of the functions mentioned above.
-
-    If you like to keep additional download information, use the functions
-    
-    1. fredImport\cr
-    2. oandaImport\cr
-    3. yahooImport
-    
-    which return objects of class \code{"fWEBDATA"}.
-    
-}    
+\keyword{package} 
 
 
-\section{Fomer Yahoo Utilities:}{
-
-    The function \code{yahooKeystats} allows to download key statistics
-    from Yahoo's web site.
-
-    The function \code{yahooBriefings} allows to download a briefing
-    from Yahoo's web site.
-        
-    Note: The Yahoo utilities \code{yahooKeystats} and \code{yahooBriefings}
-    are (as of March 2012) no longer supported.
-    
-}   
-
-
-\section{License:}{
-
-    This Rmetrics package is written for educational usage teaching
-    "Computational Finance and Financial Engineering" and licensed
-    under GPL.
-    
-}
-
-
-\references{
-Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
-    \emph{Financial Market Data for R/Rmetrics}, 
-    Rmetrics eBook, Rmetrics Association and Finance Online, Zurich,
-    www.rmetrics.org.   
-}
-
-   
-\keyword{data} 
-       
-    

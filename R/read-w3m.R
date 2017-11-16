@@ -14,19 +14,15 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C) for this R-port:
-#   1999 - 2012 Diethelm Wuertz, Zurich, <wuertz@itp.phys.ethz.ch>
-#   2009 - 2012 Rmetrics Association, Zurich, www.rmetrics.org
 
-
-################################################################################
+###############################################################################
 # FUNCTION:               DESCRIPTION:
 #  read.w3m                Uses the w3m browser to read from a web page
-################################################################################
+###############################################################################
 
 
 read.w3m <- 
-function(url, intern = TRUE, bin = NULL, pipe = FALSE, ...) 
+    function(url, intern = TRUE, bin = NULL, pipe = FALSE, ...) 
 {
     # A function implemented by Diethelm Wuertz and Yohan Chalabi
 

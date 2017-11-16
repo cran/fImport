@@ -9,26 +9,50 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
 # GNU Library General Public License for more details.
 #
-# You should have received a copy of the GNU Library General 
+# You should have received A copy of the GNU Library General 
 # Public License along with this library; if not, write to the 
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA  02111-1307  USA
 
 
 ################################################################################
-# FUNCTION:             DESCRIPTION:
-#  fWEBDATA              Class Representation for WEB download
+# FUNCTION:               DESCRIPTION:
+#  composeURL              Compose URL from partial strings
+#  indexGrep               Greps Lines given a pattern
 ################################################################################
 
 
-setClass("fWEBDATA", 
-    representation(
-        call = "call",
-        data = "timeSeries",
-        param = "character",
-        title = "character",
-        description = "character")  
-)
+composeURL <- 
+    function(..., prefix = "http://")
+{
+    # A function implemented by Diethelm Wuertz
+    
+    # Description:
+    #   Compose URL from partial strings
+    
+    # FUNCTION:
+    
+    # Return Value:
+    paste(prefix, ..., sep = "")
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+indexGrep <- 
+    function(pattern, x, ...)
+{
+    # A function implemented by Diethelm Wuertz
+    
+    # Description:
+    #   Greps Lines given a pattern
+    
+    # FUNCTION:
+    
+    # Return Value:
+    x[grep(pattern, x, ...)]
+}
 
 
 ################################################################################

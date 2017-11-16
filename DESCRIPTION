@@ -1,21 +1,21 @@
 Package: fImport
-Version: 3000.82
-Revision: 5455
-Date: 2013-03-15
-Title: Rmetrics - Economic and Financial Data Import
-Author: Diethelm Wuertz and many others
-Depends: R (>= 2.13.0), methods, timeDate, timeSeries
+Title: Rmetrics - Importing Economic and Financial Data
+Date: 2017-11-12
+Version: 3042.84
+Author: Diethelm Wuertz [aut],
+	Tobias Setz [cre],
+	Yohan Chalabi [ctb]
+Maintainer: Tobias Setz <tobias.setz@live.com>
+Description: Provides a collection of utility functions 
+    to download and manage data sets from the Internet or from other 
+    sources.
+Depends: R (>= 2.15.1), timeDate, timeSeries
+Imports: methods, utils
 Suggests: RUnit
-Maintainer: Yohan Chalabi <yohan.chalabi@rmetrics.org>
-Description: Environment for teaching "Financial Engineering and
-        Computational Finance"
-Note: Several parts are still preliminary and may be changed in the
-        future. this typically includes function and argument names, as
-        well as defaults for arguments and return values.
 LazyData: yes
 License: GPL (>= 2)
-URL: http://www.rmetrics.org
-Packaged: 2013-03-15 12:46:58 UTC; yankee
+URL: https://www.rmetrics.org
 NeedsCompilation: no
+Packaged: 2017-11-16 17:28:28 UTC; Tobias Setz
 Repository: CRAN
-Date/Publication: 2013-03-15 14:54:11
+Date/Publication: 2017-11-16 21:50:07 UTC

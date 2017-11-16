@@ -1,29 +1,29 @@
-\name{import-fred}
+\name{import-yahoo}
 
-\alias{import-fred}
+\alias{import-yahoo}
+
+\alias{yahooImport}
+\alias{yahooSeries}
 
 
-\alias{fredImport}
-\alias{fredSeries}
-
-
-\title{Import Market Data from the Fred}
+\title{Import Market Data from Yahoo}
 
 
 \description{
     
-    Imports financial time series data from research.stlouisfed.org.
+    Imports financial time series data from chart.yahoo.com.
    
 }
 
 
-\usage{
-fredSeries(symbols, from = NULL, to = Sys.timeDate(), 
-    nDaysBack = 366, \dots)
+\usage{ 
+yahooSeries(symbols, from = NULL, to = Sys.timeDate(), 
+    nDaysBack = 366, \dots) 
     
-fredImport(query, file = "tempfile", source = NULL, frequency = "daily", 
-    from = NULL, to = Sys.timeDate(), nDaysBack = NULL,
-    save = FALSE, sep = ";", try = TRUE)    
+yahooImport(query, file = "tempfile", source = NULL,
+    frequency = c("daily", "weekly", "monthly"), 
+    from = NULL, to = Sys.timeDate(), nDaysBack = 366, 
+    save = FALSE, sep = ";", try = TRUE) 
 }
 
 
@@ -78,11 +78,11 @@ fredImport(query, file = "tempfile", source = NULL, frequency = "daily",
         }
         
 }
-
-
+  
+  
 \value{
 
-    The function \code{fredImport} returns an S4 object of class 
+    The function \code{yahooImport} returns an S4 object of class 
     \code{fWEBDATA} with the following slots:
     
     \item{@call}{
@@ -104,11 +104,57 @@ fredImport(query, file = "tempfile", source = NULL, frequency = "daily",
         By default just the current date when the test was applied will
         be returned.}
         
-    The function \code{fredSeries} returns an S4 object of 
-    class \code{timeSeries} or alternatively an object specified by
+    The function \code{yahooSeries} returns an S4 object of 
+    class  \code{timeSeries} or alternatively an object specified by
     the function argument \code{returnClass}.
     \cr
     
+    The function \code{keystatsImport} returns a data frame with 
+    key statistics downloaded from yahoo's web site.
+    
+}
+
+
+\details{
+  
+    \bold{Import data from chart.yahoo.com:}
+    \cr\cr
+    
+    The query string is given as 
+    \cr\cr
+            \code{s=SYMBOL&a=DD&b=MM&c=CCYY&g=d&q=q&z=SYMBOL&x=.csv} 
+    \cr\cr
+    where \code{SYMBOL} has to replaced by the symbol name of the 
+    instrument, and \code{DD}, \code{MM}, and \code{CCYY} by the 
+    day, month-1 and century/year when the time series should start.
+
+    Here are some examples of symbols:
+
+    \tabular{ll}{
+    \code{[query]}  \tab Description: \cr
+                    \tab \cr
+    \code{^DJI}     \tab Dow Jones 30 Industrial Averages \cr
+    \code{^NYA}     \tab New York Stock Exchange Composite \cr
+    \code{^NDX}     \tab Nasdaq 100 Index \cr
+    \code{^IXIC}    \tab Nasdaq Composite Index \cr
+    \code{^TYX}     \tab US 30Y Treasury Bond Index \cr
+    \code{IBM}      \tab BM DJIA Stock \cr
+    \code{KO}       \tab Coca-Cola DJIA Stock }
+
+    The meaning of the tokens in the query string are the following:
+
+    \tabular{ll}{
+    Token           \tab Description  \cr
+                    \tab \cr
+    \code{s}        \tab Selected Ticker-Symbol \cr
+    \code{a}        \tab First Quote starts with Month (mm) \cr
+    \code{b}        \tab First Quote starts with Day (dd) \cr
+    \code{c}        \tab First Quote starts with Year (ccyy) \cr
+    \code{d}        \tab Last Quote ends with Month (mm) \cr
+    \code{e}        \tab Last Quote ends with Day (dd) \cr
+    \code{f}        \tab Last Quote ends with Year (ccyy) \cr
+    \code{z}        \tab Selected Ticker-Symbol }
+            
 }
 
 
@@ -121,17 +167,17 @@ fredImport(query, file = "tempfile", source = NULL, frequency = "daily",
     
     Feel free to inspect the code of the functions and to create your
     own download function from other Internet web sites and Portals.
-  
+     
 }
 
 
-%\seealso{
-%       
-%    Two further download functions \code{\link{oandaImport}} and 
-%    \code{\link{yahooImport}} allow to import data from Oanda and 
-%    from Yahoo Finance.
-%     
-%}
+\seealso{
+       
+    Two further download functions \code{\link{fredImport}} and 
+    \code{\link{oandaImport}} allow to import data from the U.S.
+    Federal Reserve and from Oanda.
+     
+}
 
 
 \author{
@@ -151,8 +197,8 @@ Diethelm Wuertz, Yohan Chalabi, and Andrew Ellis, (2010);
 
 
 \examples{
-fredImport("DEXSZUS")
-fredSeries("DEXSZUS")
+yahooImport("^GDAXI")
+yahooSeries("^GDAXI")
 }
 
 

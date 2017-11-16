@@ -1,64 +1,23 @@
 
 ################################################
-## import name space
+## fImport
 ################################################
 
-import("methods")
+
+################################################
+## import name space
+################################################
 import("timeDate")
 import("timeSeries")
 
-################################################
-## S4 classes
-################################################
-
-exportClasses("fWEBDATA" )
-exportMethods("$",
-              "$<-",
-              "+",
-              "-",
-              "[",
-              "[<-",
-              "cummax",
-              "cummin",
-              "cumprod",
-              "cumsum",
-              "dim",
-              "dim<-",
-              "dimnames",
-              "dimnames<-",
-              "is.na",
-              "names",
-              "names<-",
-              "show" )
-
-################################################
-## S3 classes
-################################################
+importFrom("methods", new)
+importFrom("utils", download.file, write.table)
 
 
 ################################################
 ## functions
 ################################################
 
-export(
-    ".dQuote.ascii",
-    ".getYahooData",
-    ".read.xls",
-    ".xls2csv",
-    "charvecSplit",
-    "composeURL",
-    "dataSplit",
-    "fredImport",
-    "fredSeries",
-    "indexGrep",
-    "oandaImport",
-    "oandaSeries",
-    "read.lines",
-    "read.links",
-    "read.lynx",
-    "read.w3m",
-    "read.xls",
-    "yahooBriefing",
-    "yahooImport",
-    "yahooKeystats",
-    "yahooSeries" )
+exportPattern(".")
+
+
