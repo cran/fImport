@@ -1,5 +1,5 @@
 fcb25fbcbbfd5499a94ebe3f236bcf5f *ChangeLog
-81b8fbbdd438446b80cef341762c57a3 *DESCRIPTION
+cdf0700197d2a0e83db38bfe989f9fc0 *DESCRIPTION
 5ea171770d61f38b1c7ee6a726b62ba4 *NAMESPACE
 9fb5f1bd7663bba42fbf02739d3b2562 *NEWS
 3d4e399e4839c80820502b1665443a56 *R/class-fWEBDATA.R
@@ -30,7 +30,7 @@ bfed86b132c77f1f2cd7e3edee857795 *inst/obsolete/utils-yahoo.R
 91e4a7d24ee19419502ce73e1297253a *inst/obsolete/utils-yahooKeystats.Rd
 e6995e818c304fc9533bf9c632643a2c *man/00fImport-package.Rd
 223867d5b934f9936868fff3e3730b2b *man/class-fWEBDATA.Rd
-bfcfc6ff89286e1d60d48e9a1a5499b4 *man/import-fred.Rd
+b6761c0fc4691ed1542facf0c8e3237f *man/import-fred.Rd
 fe6a375d6c5413bc5469741f06452db6 *man/methods-show.Rd
 9cb21e1796b0455c2715351239b7e084 *man/provider-listings.Rd
 33106f53a3ff7d47d6ea2b175eed8fce *man/read-lines.Rd
