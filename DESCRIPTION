@@ -1,11 +1,12 @@
 Package: fImport
 Title: Rmetrics - Importing Economic and Financial Data
-Date: 2017-11-12
-Version: 3042.85
-Author: Diethelm Wuertz [aut],
-	Tobias Setz [cre],
-	Yohan Chalabi [ctb]
-Maintainer: Tobias Setz <tobias.setz@live.com>
+Date: 2022-07-21
+Version: 4021.86
+Authors@R: c(person("Diethelm", "Wuertz", role="aut", comment = "original code")
+	   , person("Tobias", "Setz", role = c("aut"), email = "tobias.setz@live.com")
+	   , person("Yohan", "Chalabi", role = "aut")
+	   , person(given = c("Georgi", "N."), family = "Boshnakov", 
+                    role = c("cre"), email = "georgi.boshnakov@manchester.ac.uk") )
 Description: Provides a collection of utility functions 
     to download and manage data sets from the Internet or from other 
     sources.
@@ -14,8 +15,16 @@ Imports: methods, utils
 Suggests: RUnit
 LazyData: yes
 License: GPL (>= 2)
-URL: https://www.rmetrics.org
+URL:
+        https://r-forge.r-project.org/scm/viewvc.php/pkg/fImport/?root=rmetrics
+        (devel), https://www.rmetrics.org
+BugReports: https://r-forge.r-project.org/projects/rmetrics
 NeedsCompilation: no
-Packaged: 2017-11-20 16:47:03 UTC; Tobias Setz
+Packaged: 2022-07-21 06:26:22 UTC; georgi
+Author: Diethelm Wuertz [aut] (original code),
+  Tobias Setz [aut],
+  Yohan Chalabi [aut],
+  Georgi N. Boshnakov [cre]
+Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 Repository: CRAN
-Date/Publication: 2017-11-20 17:32:30 UTC
+Date/Publication: 2022-07-21 08:40:06 UTC
